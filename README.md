@@ -16,6 +16,8 @@ Projek Buku
 
 - **_.catchError((\_) {...})_** digunakan untuk menangani error yang mungkin terjadi saat mengambil data, misalnya jaringan gagal atau server error, dan mencegah aplikasi crash.
 
+## Praktikum 2
+
 ### Soal 4
 
 ![image alt](images/Soal4.gif)
@@ -74,3 +76,44 @@ Future count() async {
    - Setelah 9 detik: total = 1 + 2 + 3 = 6
 
 3. Setelah semuanya selesai, _setState()_ dipanggil untuk memperbarui tampilan aplikasi (UI) dengan nilai total tersebut.
+
+## Praktikum 3
+
+### Soal 5
+
+![image alt](images/Soal5.gif)
+
+- **Langkah 2 : Menambahkan Variabel dan Method**
+
+```dart
+late Completer completer;
+
+Future getNumber() {
+  completer = Completer<int>();
+  calculate();
+  return completer.future;
+}
+
+Future calculate() async {
+  await Future.delayed(const Duration(seconds : 5));
+  completer.complete(42);
+}
+```
+
+**Maksud dari penambahan variabel dan method pada code diatas :**
+
+1. Completer adalah objek khusus yang digunakan untuk mengontrol penyelesaian (complete) dari sebuah Future secara manual.
+
+2. Kata kunci late berarti completer akan diinisialisasi nanti, sebelum digunakan — tepatnya di dalam getNumber().
+
+3. Fungsi ini membuat Completer<int> baru.
+
+4. Kemudian menjalankan method calculate() yang akan menyelesaikan (complete) Completer setelah 5 detik.
+
+5. Mengembalikan Future dari completer.future, yang nantinya akan bernilai 42 ketika calculate() selesai.
+
+6. Fungsinya seperti menunggu jawaban dari proses asinkronus yang kita kontrol sendiri.
+
+7. Menunggu selama 5 detik (delay).
+
+8. Setelah selesai, memanggil completer.complete(42); untuk menyelesaikan Future dari getNumber() dan memberikan nilainya 42.
