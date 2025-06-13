@@ -42,10 +42,19 @@ class _FuturePageState extends State<FuturePage> {
     return completer.future;
   }
 
+  // Future calculate() async { //   // Soal 5
+  //   await Future.delayed(const Duration(seconds: 5));
+  //   completer.complete(42);
+  // }
+
   Future calculate() async {
-    // Soal 5
-    await Future.delayed(const Duration(seconds: 5));
-    completer.complete(42);
+    // Soal 6
+    try {
+      await Future.delayed(const Duration(seconds: 5));
+      completer.complete(42);
+    } catch (_) {
+      completer.completeError({});
+    }
   }
 
   Future<Response> getData() async {
@@ -103,11 +112,19 @@ class _FuturePageState extends State<FuturePage> {
 
               // count(); // Soal 4
 
+              // getNumber().then((value) { // Soal 5
+              //   setState(() {
+              //     result = value.toString();
+              //   });
+              // });
+
               getNumber().then((value) {
-                // Soal 5
+                // Soal 6
                 setState(() {
                   result = value.toString();
                 });
+              }).catchError((e) {
+                result = 'An error occurred';
               });
             },
           ),

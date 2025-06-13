@@ -117,3 +117,63 @@ Future calculate() async {
 7. Menunggu selama 5 detik (delay).
 
 8. Setelah selesai, memanggil completer.complete(42); untuk menyelesaikan Future dari getNumber() dan memberikan nilainya 42.
+
+### Soal 6
+
+**Code Langkah ke 2**
+
+```dart
+Future calculate() async {
+  await Future.delayed(const Duration(seconds : 5));
+  completer.complete(42);
+}
+```
+
+**Code Langkah ke 5-6**
+
+```dart
+Future calculate() async {
+    try {
+      await Future.delayed(const Duration(seconds: 5));
+      completer.complete(42);
+    } catch (_) {
+      completer.completeError({});
+    }
+  }
+
+
+  getNumber().then((value) {
+                // Soal 6
+                setState(() {
+                  result = value.toString();
+                });
+              }).catchError((e) {
+                result = 'An error occurred';
+              });
+```
+
+**Maksud dari perbedaan langkah 2 dan lankah 5-6 code diatas :**
+
+1. Penanganan Error
+
+   - Langkah 2 tidak menggunakan try-catch. Jika terjadi kesalahan saat proses berlangsung ( contoh: completer.complete() dipanggil dua kali atau terjadi exception lain), maka program akan langsung error atau crash.
+
+   - Langkah 5–6 menambahkan try-catch di dalam method calculate() dan catchError() saat memanggil getNumber(). Jadi saat penambagan try-catch, membuat program jadi lebih aman. Karena kalau terjadi kesalahan, error bisa ditangkap dan ditangani dengan baik.
+
+2. Kode calculate()
+
+   - Pada Langkah 2, isi dari method calculate() hanya menunggu selama 5 detik, kemudian langsung menyelesaikan future (completer.complete(42)) tanpa mempertimbangkan apakah ada error atau tidak.
+
+   - Sedangkan pada Langkah 5, method calculate() mencoba menyelesaikan future dengan nilai 42 dalam blok try. Jika terjadi error, maka akan berpindah ke blok catch, dan future akan diselesaikan dengan status gagal (completer.completeError({})).
+
+3. Tampilan di UI
+
+   - Langkah 2 tidak memiliki mekanisme untuk menangani hasil error, sehingga jika terjadi kesalahan, pengguna tidak mendapatkan informasi apa pun (hanya kosong atau crash).
+
+   - Langkah 5–6 memiliki penanganan pada sisi tampilan (.catchError((e) { ... })) yang memungkinkan aplikasi menampilkan pesan “An error occurred” saat terjadi kesalahan, sehingga pengguna tetap mendapat umpan balik yang jelas.
+
+4. Keamanan Program
+
+   - Program pada Langkah 2 lebih rentan crash karena tidak siap menangani kesalahan.
+
+   - Sebaliknya, Langkah 5–6 jauh lebih aman dan stabil. Dengan adanya try-catch dan catchError(), aplikasi bisa menghindari crash dan tetap berjalan normal meskipun terjadi masalah.
