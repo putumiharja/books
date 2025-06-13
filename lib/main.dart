@@ -32,6 +32,14 @@ class FuturePage extends StatefulWidget {
 
 class _FuturePageState extends State<FuturePage> {
   String result = '';
+
+  Future<Response> getData() async {
+    const authority = 'www.googleapis.com';
+    const path = '/books/edition/Web_Service_APIs_and_Libraries/Pt2aAwAAQBAJ';
+    Uri url = Uri.https(authority, path);
+    return http.get(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
