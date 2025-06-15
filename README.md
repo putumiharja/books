@@ -250,3 +250,9 @@ void returnFG() {
    - Semua future harus sudah diketahui saat dipanggil.
 
    - Tidak bisa menambah future setelah fungsi dijalankan.
+
+## Praktikum 5
+
+### Soal 9
+
+![image alt](images/Soal9.gif)
