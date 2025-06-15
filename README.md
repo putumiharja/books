@@ -177,3 +177,9 @@ Future calculate() async {
    - Program pada Langkah 2 lebih rentan crash karena tidak siap menangani kesalahan.
 
    - Sebaliknya, Langkah 5–6 jauh lebih aman dan stabil. Dengan adanya try-catch dan catchError(), aplikasi bisa menghindari crash dan tetap berjalan normal meskipun terjadi masalah.
+
+## Praktikum 4
+
+### Soal 7
+
+![image alt](images/Soal7.gif)
