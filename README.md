@@ -183,3 +183,70 @@ Future calculate() async {
 ### Soal 7
 
 ![image alt](images/Soal7.gif)
+
+### Soal 8
+
+```dart
+Langkah 1
+void returnFG() {
+    FutureGroup<int> futureGroup = FutureGroup<int>(); // Soal 7
+    futureGroup.add(returnOneAsync());
+    futureGroup.add(returnTwoAsync());
+    futureGroup.add(returnThreeAsync());
+    futureGroup.close();
+    futureGroup.future.then((List<int> value) {
+      int total = 0;
+      for (var element in value) {
+        total += element;
+      }
+      setState(() {
+        result = total.toString();
+      });
+    });
+  }
+
+Langkah 4
+void returnFG() {
+    final future = Future.wait<int>([
+      returnOneAsync(),
+      returnTwoAsync(),
+      returnThreeAsync(),
+    ]);
+
+    future.then((List<int> value) {
+      int total = 0;
+      for (var element in value) {
+        total += element;
+      }
+      setState(() {
+        result = total.toString();
+      });
+    });
+  }
+```
+
+**Maksud dari perbedaan langkah 1 dan lankah 4 code diatas :**
+
+1. **FutureGroup**
+
+   - Bisa menambah Future secara bertahap/dinamis.
+
+   - Penggunaan yang tepat untuk kondisi jumlah task tidak tetap (misalnya dalam perulangan atau kondisi tertentu).
+
+   - Harus memanggil **_.close()_** setelah semua future ditambahkan.
+
+   - Perlu tambahan import:
+
+   ```dart
+   import 'package:async/async.dart';
+   ```
+
+2. **Future.wait**
+
+   - Praktis dan ringkas.
+
+   - Tidak perlu memanggil close().
+
+   - Semua future harus sudah diketahui saat dipanggil.
+
+   - Tidak bisa menambah future setelah fungsi dijalankan.

@@ -37,12 +37,21 @@ class _FuturePageState extends State<FuturePage> {
   late Completer completer;
 
   void returnFG() {
-    FutureGroup<int> futureGroup = FutureGroup<int>();
-    futureGroup.add(returnOneAsync());
-    futureGroup.add(returnTwoAsync());
-    futureGroup.add(returnThreeAsync());
-    futureGroup.close();
-    futureGroup.future.then((List<int> value) {
+    // FutureGroup<int> futureGroup = FutureGroup<int>(); // Soal 7
+    // futureGroup.add(returnOneAsync());
+    // futureGroup.add(returnTwoAsync());
+    // futureGroup.add(returnThreeAsync());
+    // futureGroup.close();
+    // futureGroup.future.then((List<int> value) {
+
+    final future = Future.wait<int>([
+      // Soal 8
+      returnOneAsync(),
+      returnTwoAsync(),
+      returnThreeAsync(),
+    ]);
+
+    future.then((List<int> value) {
       int total = 0;
       for (var element in value) {
         total += element;
