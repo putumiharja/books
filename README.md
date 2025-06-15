@@ -256,3 +256,44 @@ void returnFG() {
 ### Soal 9
 
 ![image alt](images/Soal9.gif)
+
+### Soal 10
+
+```dart
+Langkah 1
+Future returnError() async {
+    await Future.delayed(const Duration(seconds: 2));
+    throw Exception('Something terrible happend!');
+  }
+
+Langkah 4
+Future handleError() async {
+    try {
+      await returnError();
+    } catch (error) {
+      setState(() {
+        result = error.toString();
+      });
+    } finally {
+      print("Complete");
+    }
+  }
+```
+
+Hasil setelah di run masih sama, tetapi terdapat perbedaan pada langkah 1 dan 4 code diatas
+
+- Langkah 1 Method returnError()
+
+  - Fungsi ini secara sengaja melempar error setelah menunggu 2 detik.
+
+  - Jika kamu memanggil ini tanpa try-catch, maka program akan melempar unhandled exception, yang bisa menyebabkan aplikasi crash jika tidak ditangani.
+
+- Langkah 1 Method handleError()
+
+  - Fungsi ini menangani error dari returnError() secara aman.
+
+  - try akan mencoba menjalankan kode yang mungkin gagal.
+
+  - catch akan menangkap error dan menampilkannya di UI melalui setState.
+
+  - finally dijalankan selalu, baik saat berhasil maupun gagal. Biasanya digunakan untuk clean-up atau log.

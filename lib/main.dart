@@ -41,6 +41,18 @@ class _FuturePageState extends State<FuturePage> {
     throw Exception('Something terrible happend!');
   } // Soal 9
 
+  Future handleError() async {
+    try {
+      await returnError();
+    } catch (error) {
+      setState(() {
+        result = error.toString();
+      });
+    } finally {
+      print("Complete");
+    }
+  } // Soal 10
+
   void returnFG() {
     // FutureGroup<int> futureGroup = FutureGroup<int>(); // Soal 7
     // futureGroup.add(returnOneAsync());
@@ -160,15 +172,17 @@ class _FuturePageState extends State<FuturePage> {
 
               // returnFG(); // Soal 7
 
-              returnError().then((value) {
-                setState(() {
-                  result = 'Success';
-                });
-              }).catchError((onError) {
-                setState(() {
-                  result = onError.toString();
-                });
-              }).whenComplete(() => print('Complete')); // Soal 9
+              // returnError().then((value) {
+              //   setState(() {
+              //     result = 'Success';
+              //   });
+              // }).catchError((onError) {
+              //   setState(() {
+              //     result = onError.toString();
+              //   });
+              // }).whenComplete(() => print('Complete')); // Soal 9
+
+              handleError(); // Soal 10
             },
           ),
           const Spacer(),
