@@ -297,3 +297,9 @@ Hasil setelah di run masih sama, tetapi terdapat perbedaan pada langkah 1 dan 4 
   - catch akan menangkap error dan menampilkannya di UI melalui setState.
 
   - finally dijalankan selalu, baik saat berhasil maupun gagal. Biasanya digunakan untuk clean-up atau log.
+
+## Praktikum 6
+
+### Soal 11
+
+![image alt](images/Soal11.png)
