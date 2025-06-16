@@ -303,3 +303,17 @@ Hasil setelah di run masih sama, tetapi terdapat perbedaan pada langkah 1 dan 4 
 ### Soal 11
 
 ![image alt](images/Soal11.png)
+
+### Soal 12
+
+![image alt](images/Soal12.png)
+
+Saat coba run di browser, latitude dan longitude masih bisa di dapatkan karena :
+
+- Edge Menggunakan Chromium Engine
+
+- Kita menjalankan di localhost
+
+- Kamu Memberikan Izin Lokasi
+
+- Geolocator mendukung web secara terbatas

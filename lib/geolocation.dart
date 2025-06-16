@@ -10,25 +10,57 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   String myPosition = '';
+  Future<Position>? position;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getPosition().then((Position myPos) {
+  //     myPosition =
+  //         'Latitude: ${myPos.latitude.toString()} - Longtitude: ${myPos.longitude.toString()}';
+  //     setState(() {
+  //       myPosition = myPosition;
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    getPosition().then((Position myPos) {
-      myPosition =
-          'Latitude: ${myPos.latitude.toString()} - Longtitude: ${myPos.longitude.toString()}';
-      setState(() {
-        myPosition = myPosition;
-      });
-    });
+    position = getPosition();
   }
 
   @override
   Widget build(BuildContext context) {
+    // final myWidget = myPosition == ''
+    //     ? const CircularProgressIndicator()
+    //     : Text(myPosition); // Soal 12
+
+    // return Scaffold(
+    //   appBar: AppBar(title: const Text("Eka")),
+    //   body: Center(child: myWidget),
+    // );
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Eka')),
+      appBar: AppBar(title: const Text("Eka")),
       body: Center(
-        child: Text(myPosition),
+        child: FutureBuilder<Position>(
+          future: position,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator(); // ← Loading animasi tampil
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else if (snapshot.hasData) {
+              final position = snapshot.data!;
+              return Text(
+                'Latitude: ${position.latitude} - Longitude: ${position.longitude}',
+              );
+            } else {
+              return const Text("Eka");
+            }
+          },
+        ),
       ),
     );
   }
@@ -36,7 +68,10 @@ class _LocationScreenState extends State<LocationScreen> {
   Future<Position> getPosition() async {
     await Geolocator.requestPermission();
     await Geolocator.isLocationServiceEnabled();
-    Position? position = await Geolocator.getCurrentPosition();
+    await Future.delayed(const Duration(
+        seconds:
+            3)); // Animasi loading ditambahkan karena saat proses run sebelumnya, animasi tidak muncul
+    Position position = await Geolocator.getCurrentPosition();
     return position;
   }
 }
