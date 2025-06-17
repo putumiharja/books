@@ -306,7 +306,7 @@ Hasil setelah di run masih sama, tetapi terdapat perbedaan pada langkah 1 dan 4 
 
 ### Soal 12
 
-![image alt](images/Soal12.png)
+![image alt](images/Soal12.gif)
 
 Saat coba run di browser, latitude dan longitude masih bisa di dapatkan karena :
 
@@ -322,7 +322,7 @@ Saat coba run di browser, latitude dan longitude masih bisa di dapatkan karena :
 
 ### Soal 13
 
-![image alt](images/Soal13.png)
+![image alt](images/Soal13.gif)
 
 Dalam pengambilan data lokasi menggunakan Flutter dan package geolocator, ada dua pendekatan umum yang bisa digunakan. Meskipun keduanya bertujuan untuk menampilkan data koordinat lokasi pengguna (latitude dan longitude), terdapat perbedaan signifikan dalam cara mereka mengelola Future dan menampilkan hasil ke UI.
 
