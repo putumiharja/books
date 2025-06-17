@@ -367,3 +367,15 @@ void initState() {
 - UI dibangun menggunakan FutureBuilder, yang akan memantau position.
 
 - Tidak perlu menggunakan setState() karena FutureBuilder akan membangun ulang UI secara otomatis saat data tersedia.
+
+### Soal 14
+
+![image alt](images/Soal14.gif)
+
+Menambahkan blok if (snapshot.hasError) ke dalam ConnectionState.done akan membuat perbedaan pada UI, tapi hanya dalam kondisi tertentu (Mematikan GPS/Lokasi), karena :
+
+- FutureBuilder akan tetap sampai ke tahap ConnectionState.done walau terjadi error.
+
+- Tanpa snapshot.hasError, kita tidak tahu apakah data valid atau tidak.
+
+- Menambahkan snapshot.hasError memberi kita kendali penuh untuk menampilkan UI berbeda saat terjadi masalah.
