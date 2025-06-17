@@ -317,3 +317,53 @@ Saat coba run di browser, latitude dan longitude masih bisa di dapatkan karena :
 - Kamu Memberikan Izin Lokasi
 
 - Geolocator mendukung web secara terbatas
+
+## Praktikum 7
+
+### Soal 13
+
+![image alt](images/Soal13.png)
+
+Dalam pengambilan data lokasi menggunakan Flutter dan package geolocator, ada dua pendekatan umum yang bisa digunakan. Meskipun keduanya bertujuan untuk menampilkan data koordinat lokasi pengguna (latitude dan longitude), terdapat perbedaan signifikan dalam cara mereka mengelola Future dan menampilkan hasil ke UI.
+
+**1. Pendekatan Pertama : Menggunakan setState() setelah Mendapatkan Data**
+
+```dart
+@override
+void initState() {
+  super.initState();
+  getPosition().then((Position myPos) {
+    myPosition =
+        'Latitude: ${myPos.latitude.toString()} - Longtitude: ${myPos.longitude.toString()}';
+    setState(() {
+      myPosition = myPosition;
+    });
+  });
+}
+```
+
+- Data lokasi diambil menggunakan fungsi getPosition() yang dipanggil langsung dengan .then(...).
+
+- Hasil dari lokasi disimpan ke dalam variabel String (myPosition).
+
+- setState() digunakan untuk trigger pembaruan UI secara manual.
+
+- Namun, FutureBuilder menggunakan position yang tidak pernah diisi.
+
+**2. Pendekatan Kedua: Menggunakan Future Langsung dan FutureBuilder**
+
+```dart
+Future<Position>? position;
+
+@override
+void initState() {
+  super.initState();
+  position = getPosition(); // menyimpan Future
+}
+```
+
+- Fungsi getPosition() dipanggil saat initState() dan hasilnya langsung disimpan dalam variabel Future<Position>?.
+
+- UI dibangun menggunakan FutureBuilder, yang akan memantau position.
+
+- Tidak perlu menggunakan setState() karena FutureBuilder akan membangun ulang UI secara otomatis saat data tersedia.
