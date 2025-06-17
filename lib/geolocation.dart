@@ -41,23 +41,41 @@ class _LocationScreenState extends State<LocationScreen> {
     //   body: Center(child: myWidget),
     // );
 
+    // return Scaffold(
+    //   appBar: AppBar(title: const Text("Eka")),
+    //   body: Center(
+    //     child: FutureBuilder<Position>(
+    //       future: position,
+    //       builder: (context, snapshot) {
+    //         if (snapshot.connectionState == ConnectionState.waiting) {
+    //           return const CircularProgressIndicator(); // ← Loading animasi tampil
+    //         } else if (snapshot.hasError) {
+    //           return Text('Error: ${snapshot.error}');
+    //         } else if (snapshot.hasData) {
+    //           final position = snapshot.data!;
+    //           return Text(
+    //             'Latitude: ${position.latitude} - Longitude: ${position.longitude}',
+    //           );
+    //         } else {
+    //           return const Text("Eka");
+    //         }
+    //       },
+    //     ),
+    //   ),
+    // );
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Eka")),
+      appBar: AppBar(title: const Text("Current Location")),
       body: Center(
-        child: FutureBuilder<Position>(
+        child: FutureBuilder(
           future: position,
-          builder: (context, snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<Position> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator(); // ← Loading animasi tampil
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else if (snapshot.hasData) {
-              final position = snapshot.data!;
-              return Text(
-                'Latitude: ${position.latitude} - Longitude: ${position.longitude}',
-              );
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              return Text(snapshot.data.toString());
             } else {
-              return const Text("Eka");
+              return const Text('');
             }
           },
         ),
@@ -66,11 +84,16 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   Future<Position> getPosition() async {
-    await Geolocator.requestPermission();
+    // await Geolocator.requestPermission();
+    // await Geolocator.isLocationServiceEnabled();
+    // await Future.delayed(const Duration(
+    //     seconds:
+    //         3)); // Animasi loading ditambahkan karena saat proses run sebelumnya, animasi tidak muncul
+    // Position position = await Geolocator.getCurrentPosition();
+    // return position;
+
     await Geolocator.isLocationServiceEnabled();
-    await Future.delayed(const Duration(
-        seconds:
-            3)); // Animasi loading ditambahkan karena saat proses run sebelumnya, animasi tidak muncul
+    await Future.delayed(const Duration(seconds: 3));
     Position position = await Geolocator.getCurrentPosition();
     return position;
   }
