@@ -397,10 +397,23 @@ Setelah kita menekan dan memilih warna yang kita inginkan pada halaman second sc
 
 - Karena Navigator.pop(context, color) mengembalikan sebuah objek Color.
 
-- Dan di layar pertama (NavigationFirst), kamu menangkap hasil tersebut di :
-
-  ```dart
-  color = await Navigator.push(...);
-  ```
+- Dan di layar pertama (NavigationFirst) kita menangkap hasil tersebut
 
 - Objek tersebut kemudian dipakai sebagai backgroundColor di Scaffold.
+
+### Soal 17
+
+![image alt](images/Soal17.gif)
+
+Warna akan di set dan bcakground akan berubah warna sesuai dengan tombol dialog yang kita pilih.
+
+Pada saat menekan tombol dialog warna yang dipilih, warna akan berubah sesuai dengan variabel color, lalu dialog akan ditutup dengan **_.pop(context, color)_** seperti contoh code dibawah.
+
+```dart
+onPressed: () {
+                  color = Colors.blue.shade700;
+                  Navigator.pop(context, color);
+                },
+```
+
+Setelah warna disimpan dan ditutup oleh dialog **_.pop(context, color)_**, UI akan dibangun ulang dan akan dikembalikan ke layar utama melalui **\*setState(() {})** sesuai dengan warna yang telah dipilih.

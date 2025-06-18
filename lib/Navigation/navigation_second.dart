@@ -57,7 +57,6 @@ class _NavigationSecondState extends State<NavigationSecond> {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                 );
-
                 Navigator.pop(context, gradientMagenta);
               },
             ),

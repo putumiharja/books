@@ -1,4 +1,5 @@
 import 'dart:async';
+import '../Navigation/navigation_dialog.dart';
 import '../Navigation/navigation_first.dart';
 import '../geolocation.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +24,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // home: const FuturePage(),
-      // home: const LocationScreen(),
-      home: const NavigationFirst(),
+      // home: const LocationScreen(), //// Soal 14 & 13
+      // home: const NavigationFirst(), //// Soal 15 & 16
+      home: const NavigationDialogScreen(), // Soal 17
     );
   }
 }
