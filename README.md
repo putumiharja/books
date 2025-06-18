@@ -379,3 +379,7 @@ Menambahkan blok if (snapshot.hasError) ke dalam ConnectionState.done akan membu
 - Tanpa snapshot.hasError, kita tidak tahu apakah data valid atau tidak.
 
 - Menambahkan snapshot.hasError memberi kita kendali penuh untuk menampilkan UI berbeda saat terjadi masalah.
+
+### Soal 15
+
+Done
