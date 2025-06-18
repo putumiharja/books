@@ -380,6 +380,27 @@ Menambahkan blok if (snapshot.hasError) ke dalam ConnectionState.done akan membu
 
 - Menambahkan snapshot.hasError memberi kita kendali penuh untuk menampilkan UI berbeda saat terjadi masalah.
 
+## Praktikum 8
+
 ### Soal 15
 
 Done
+
+### Soal 16
+
+![image alt](images/Soal16.gif)
+
+Ketika kita menekam tombol **_Change Color_** pada first screen, kita akan diarahkan ke halaman second screen, lalu pada halaman second screen kita akan ditampilkan pilihan beberapa warna yang dapat kita pilih.
+Setelah kita menekan dan memilih warna yang kita inginkan pada halaman second screen, kita akan diarahkan kembali ke halaman first screen dengan tampilan warna yang kita pilih pada halaman second screen sebelumnya
+
+**Mengapa Berhasil?**
+
+- Karena Navigator.pop(context, color) mengembalikan sebuah objek Color.
+
+- Dan di layar pertama (NavigationFirst), kamu menangkap hasil tersebut di :
+
+  ```dart
+  color = await Navigator.push(...);
+  ```
+
+- Objek tersebut kemudian dipakai sebagai backgroundColor di Scaffold.
